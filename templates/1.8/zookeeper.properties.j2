@@ -42,5 +42,5 @@ autopurge.snapRetainCount={{ nifi_zookeeper_autopurge_snapRetainCount }}
 # administration guide for more details.
 #
 {% for node_ip in nifi_zookeeper_servers -%}
-server.{{  node_ip | splitext | last | replace('.', '') }}={{ node_ip }}:2888:3888
+server.{{  node_ip | regex_replace('^nifi-([0-9]+)[abc].*', '\\1') }}={{ node_ip }}:2888:3888
 {% endfor -%}
